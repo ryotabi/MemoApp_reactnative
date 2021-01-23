@@ -18,6 +18,9 @@
         "react"
     ],
     "rules": {
-        "no-use-before-define":0
+        "no-use-before-define":0,
+        "linebreak-style":0,
+        "indent":0,
+        "react/jsx-indent":0
         }
 }
