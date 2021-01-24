@@ -7,7 +7,7 @@ export default function CircleButton(props) {
     const { style, name } = props;
     return (
         <View style={[styles.circleButton, style]}>
-            <AntDesign name={name} size={24} color="black" />
+            <AntDesign name={name} size={24} color="white" />
         </View>
     );
 }
