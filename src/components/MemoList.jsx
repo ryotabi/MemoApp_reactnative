@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert, FlatList } from 'react
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { shape, string, instanceOf, arrayOf } from 'prop-types';
+import dateToString from '../Utils/index';
 
 export default function MemoList(props) {
     const navigation = useNavigation();
@@ -10,7 +11,7 @@ export default function MemoList(props) {
 
     const renderItem = (item) => {
         return (
-            <TouchableOpacity style={styles.memoListItem} onPress={() => { navigation.navigate('MemoDetail'); }}>
+            <TouchableOpacity style={styles.memoListItem} onPress={() => { navigation.navigate('MemoDetail', { id: item.item.id }); }}>
                 <View>
                     <Text
                       style={styles.memoListItemTitle}
@@ -18,7 +19,7 @@ export default function MemoList(props) {
                     >
                         {item.item.bodyText}
                     </Text>
-                    <Text style={styles.memoListItemData}>{String(item.item.updatedAt)}</Text>
+                    <Text style={styles.memoListItemData}>{dateToString(item.item.updatedAt)}</Text>
                 </View>
                 <TouchableOpacity
                   onPress={() => { Alert.alert('Are you sure?'); }}
