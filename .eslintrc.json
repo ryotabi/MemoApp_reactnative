@@ -23,6 +23,7 @@
         "indent":0,
         "react/jsx-indent":0,
         "object-curly-newline":0,
-        "react/prop-types": ["error", { "ignore": ["navigation"] }]
+        "react/prop-types": ["error", { "ignore": ["navigation"] }],
+        "arrow-body-style": 0
         }
 }

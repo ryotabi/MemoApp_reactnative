@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import firebase from 'firebase';
 import CircleButton from '../components/CircleButton';
