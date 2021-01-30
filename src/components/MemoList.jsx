@@ -3,11 +3,35 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert, FlatList } from 'react
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { shape, string, instanceOf, arrayOf } from 'prop-types';
+import firebase from 'firebase';
 import dateToString from '../Utils/index';
 
 export default function MemoList(props) {
     const navigation = useNavigation();
     const { memos } = props;
+
+    const deleteMemo = (id) => {
+        const { currentUser } = firebase.auth();
+        if (currentUser) {
+            const db = firebase.firestore();
+            const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+            Alert.alert('メモを削除します', 'よろしいですか？', [
+                {
+                    text: 'キャンセル',
+                    onPress: () => {},
+                },
+                {
+                    text: '削除する',
+                    style: 'destructive',
+                    onPress: () => {
+                        ref.delete().catch(() => {
+                            Alert.alert('削除に失敗しました');
+                        });
+                    },
+                },
+            ]);
+        }
+    };
 
     const renderItem = (item) => {
         return (
@@ -22,7 +46,7 @@ export default function MemoList(props) {
                     <Text style={styles.memoListItemData}>{dateToString(item.item.updatedAt)}</Text>
                 </View>
                 <TouchableOpacity
-                  onPress={() => { Alert.alert('Are you sure?'); }}
+                  onPress={() => { deleteMemo(item.item.id); }}
                   style={styles.memoDelete}
                 >
                     <AntDesign name="close" size={16} color="gray" />
