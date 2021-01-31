@@ -11,16 +11,13 @@ export default function SignUpScreen(props) {
 
     const handlePress = () => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then((userCredential) => {
-            const { user } = userCredential;
-            console.log(user.id);
+          .then(() => {
             navigation.reset({
                 index: 0,
                 routes: [{ name: 'MemoList' }],
             });
           })
           .catch((error) => {
-              console.log(error.code, error.message);
               const errorMsg = translateErrors(error.code);
               Alert.alert(errorMsg.title, errorMsg.description);
           });
