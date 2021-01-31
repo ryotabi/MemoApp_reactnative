@@ -37,6 +37,7 @@ export default function MemoList(props) {
         return (
             <TouchableOpacity style={styles.memoListItem} onPress={() => { navigation.navigate('MemoDetail', { id: item.item.id }); }}>
                 <View>
+                    <View style={styles.memoInner}>
                     <Text
                       style={styles.memoListItemTitle}
                       numberOfLines={1}
@@ -44,6 +45,7 @@ export default function MemoList(props) {
                         {item.item.bodyText}
                     </Text>
                     <Text style={styles.memoListItemData}>{dateToString(item.item.updatedAt)}</Text>
+                    </View>
                 </View>
                 <TouchableOpacity
                   onPress={() => { deleteMemo(item.item.id); }}
@@ -97,5 +99,8 @@ const styles = StyleSheet.create({
       },
       memoDelete: {
           padding: 8,
+      },
+      memoInner: {
+          flex: 1,
       },
 });
